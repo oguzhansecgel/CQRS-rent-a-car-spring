@@ -1,16 +1,18 @@
 package com.rent_a_car.car_service.command.commands.car;
 
+
 import jakarta.validation.constraints.NotEmpty;
 
-public class CreateCarCommand {
+public class UpdateCarCommand {
+
     @NotEmpty(message = "{car.name.validation.constraints.NotNull.message}")
     private String name;
     private int brandId;
 
-    public CreateCarCommand() {
+    public UpdateCarCommand() {
     }
 
-    public CreateCarCommand(String name, int brandId) {
+    public UpdateCarCommand( String name, int brandId) {
         this.name = name;
         this.brandId = brandId;
     }

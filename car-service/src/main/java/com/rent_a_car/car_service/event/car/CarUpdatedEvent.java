@@ -1,14 +1,14 @@
 package com.rent_a_car.car_service.event.car;
 
-public class CarCreatedEvent {
+public class CarUpdatedEvent {
     private int id;
     private String name;
     private String brandName;
 
-    public CarCreatedEvent() {
+    public CarUpdatedEvent() {
     }
 
-    public CarCreatedEvent(int id, String name, String brandName) {
+    public CarUpdatedEvent(int id, String name, String brandName) {
         this.id = id;
         this.name = name;
         this.brandName = brandName;
@@ -40,7 +40,7 @@ public class CarCreatedEvent {
 
     @Override
     public String toString() {
-        return "CarCreatedEvent{" +
+        return "CarUpdatedEvent{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", brandName='" + brandName + '\'' +
