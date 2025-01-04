@@ -8,6 +8,7 @@ import com.rent_a_car.car_service.command.kafka.CarEventProducer;
 import com.rent_a_car.car_service.command.model.Car;
 import com.rent_a_car.car_service.command.repository.BrandRepository;
 import com.rent_a_car.car_service.command.repository.CarRepository;
+import com.rent_a_car.car_service.command.repository.RentalConditionsRepository;
 import com.rent_a_car.car_service.event.car.CarCreatedEvent;
 import com.rent_a_car.car_service.event.car.CarDeletedEvent;
 import com.rent_a_car.car_service.event.car.CarUpdatedEvent;
@@ -19,11 +20,13 @@ import java.util.Optional;
 public class CarCommandHandler {
     private final CarRepository carRepository;
     private final BrandRepository brandRepository;
+    private final RentalConditionsRepository conditionsRepository;
     private final CarEventProducer carEventProducer;
 
-    public CarCommandHandler(CarRepository carRepository, BrandRepository brandRepository, CarEventProducer carEventProducer) {
+    public CarCommandHandler(CarRepository carRepository, BrandRepository brandRepository, RentalConditionsRepository conditionsRepository, CarEventProducer carEventProducer) {
         this.carRepository = carRepository;
         this.brandRepository = brandRepository;
+        this.conditionsRepository = conditionsRepository;
         this.carEventProducer = carEventProducer;
     }
 
@@ -31,11 +34,46 @@ public class CarCommandHandler {
     {
         Car car = new Car();
         car.setName(createCarCommand.getName());
+        car.setSeatCount(createCarCommand.getSeatCount());
+        car.setLuggageCapacity(createCarCommand.getLuggageCapacity());
+        car.setPassengerAirbag(createCarCommand.isPassengerAirbag());
+        car.setAbs(createCarCommand.isAbs());
+        car.setFuelType(createCarCommand.getFuelType());
+        car.setTransmissionType(createCarCommand.getTransmissionType());
+
         car.setBrand(brandRepository.findById(createCarCommand.getBrandId()).orElseThrow());
+
+        car.setRentalConditions(conditionsRepository.findById(createCarCommand.getRentalConditionsId())
+                .orElseThrow(() -> new IllegalArgumentException("Rental conditions not found")));
+
         Car savedCar =  carRepository.save(car);
-        CarCreatedEvent carCreatedEvent = new CarCreatedEvent(car.getId(),car.getName(), car.getBrand().getName());
+        CarCreatedEvent carCreatedEvent = new CarCreatedEvent(
+                car.getId(),
+                car.getName(),
+                car.getSeatCount(),
+                car.getLuggageCapacity(),
+                car.isPassengerAirbag(),
+                car.isAbs(),
+                car.getFuelType(),
+                car.getTransmissionType(),
+                car.getBrand().getName(),
+                car.getRentalConditions().getMinimumAge(),
+                car.getRentalConditions().getMinimumLicenseAge(),
+                car.getRentalConditions().getRequiredCreditCards()
+        );
         carEventProducer.sendMessage(carCreatedEvent);
-        return new CreateCarResponse(savedCar.getId(),savedCar.getName(),savedCar.getBrand().getName());
+        return new CreateCarResponse(
+                savedCar.getId(),
+                savedCar.getName(),
+                savedCar.getSeatCount(),
+                savedCar.getLuggageCapacity(),
+                savedCar.isPassengerAirbag(),
+                savedCar.isAbs(),
+                savedCar.getFuelType(),
+                savedCar.getTransmissionType(),
+                savedCar.getBrand().getId(),
+                savedCar.getRentalConditions().getId()
+        );
 
     }
     public UpdateCarResponse updateCarCommand(UpdateCarCommand updateCarCommand, int id)
@@ -43,11 +81,46 @@ public class CarCommandHandler {
         Optional<Car> existingCar = carRepository.findById(id);
         Car car = existingCar.get();
         car.setName(updateCarCommand.getName());
+        car.setSeatCount(updateCarCommand.getSeatCount());
+        car.setLuggageCapacity(updateCarCommand.getLuggageCapacity());
+        car.setPassengerAirbag(updateCarCommand.isPassengerAirbag());
+        car.setAbs(updateCarCommand.isAbs());
+        car.setFuelType(updateCarCommand.getFuelType());
+        car.setTransmissionType(updateCarCommand.getTransmissionType());
+
         car.setBrand(brandRepository.findById(updateCarCommand.getBrandId()).orElseThrow());
-        Car savedCar = carRepository.save(car);
-        CarUpdatedEvent event = new CarUpdatedEvent(savedCar.getId(),savedCar.getName(),savedCar.getBrand().getName());
+
+        car.setRentalConditions(conditionsRepository.findById(updateCarCommand.getRentalConditionsId())
+                .orElseThrow(() -> new IllegalArgumentException("Rental conditions not found")));
+
+        Car savedCar =  carRepository.save(car);
+        CarUpdatedEvent event = new CarUpdatedEvent(
+                savedCar.getId(),
+                savedCar.getName(),
+                savedCar.getSeatCount(),
+                savedCar.getLuggageCapacity(),
+                savedCar.isPassengerAirbag(),
+                savedCar.isAbs(),
+                savedCar.getFuelType(),
+                savedCar.getTransmissionType(),
+                savedCar.getBrand().getName(),
+                savedCar.getRentalConditions().getMinimumAge(),
+                savedCar.getRentalConditions().getMinimumLicenseAge(),
+                savedCar.getRentalConditions().getRequiredCreditCards()
+        );
         carEventProducer.sendUpdateMessage(event);
-        return new UpdateCarResponse(savedCar.getId(),savedCar.getName(),savedCar.getBrand().getName());
+        return new UpdateCarResponse(
+                savedCar.getId(),
+                savedCar.getName(),
+                savedCar.getSeatCount(),
+                savedCar.getLuggageCapacity(),
+                savedCar.isPassengerAirbag(),
+                savedCar.isAbs(),
+                savedCar.getFuelType(),
+                savedCar.getTransmissionType(),
+                savedCar.getBrand().getId(),
+                savedCar.getRentalConditions().getId()
+        );
     }
     public void deletedCarCommand(int id)
     {

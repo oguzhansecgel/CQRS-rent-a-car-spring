@@ -23,7 +23,7 @@ public class CarEventConsumer {
     )
     public void consume(CarCreatedEvent event)
     {
-        System.out.println("Car Created Event: " + event);
+        System.out.println("consumer created event : " + event);
         service.createCarElasticSearchDB(event);
     }
     @KafkaListener(

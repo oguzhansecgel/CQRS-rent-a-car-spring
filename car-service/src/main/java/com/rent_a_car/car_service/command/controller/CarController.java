@@ -20,20 +20,22 @@ public class CarController {
     }
 
     @DeleteMapping("/deleted/car/{id}")
-    public void deleteCar(@PathVariable int id)
+    public ApiResponse<Void> deleteCar(@PathVariable int id)
     {
         carCommandHandler.deletedCarCommand(id);
+        return new ApiResponse<>(true,"Car deleted successfully",null);
+
     }
     @PostMapping("/create/car")
     public ApiResponse<CreateCarResponse> createCar(@Valid @RequestBody CreateCarCommand command)
     {
         CreateCarResponse response =  carCommandHandler.createCarCommand(command);
-        return new ApiResponse<>(true,"Succesfully",response);
+        return new ApiResponse<>(true,"Car created successfully",response);
     }
     @PutMapping("/update/car/{id}")
     public ApiResponse<UpdateCarResponse> updateCar(@Valid @RequestBody UpdateCarCommand command, @PathVariable int id)
     {
         UpdateCarResponse response = carCommandHandler.updateCarCommand(command, id);
-        return new ApiResponse<>(true,"Succesfully",response);
+        return new ApiResponse<>(true,"Car updated successfully",response);
     }
 }

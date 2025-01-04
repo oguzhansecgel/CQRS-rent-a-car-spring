@@ -1,7 +1,6 @@
 package com.rent_a_car.car_service.query.service;
 
 import com.rent_a_car.car_service.event.car.CarCreatedEvent;
-import com.rent_a_car.car_service.event.car.CarDeletedEvent;
 import com.rent_a_car.car_service.event.car.CarUpdatedEvent;
 import com.rent_a_car.car_service.query.car.FindAllCarsQuery;
 import com.rent_a_car.car_service.query.mapper.CarMapping;
@@ -28,10 +27,18 @@ public class ElasticSearchCarService {
     public void createCarElasticSearchDB(CarCreatedEvent event)
     {
         Car car = new Car();
-
         car.setId(String.valueOf(event.getId()));
         car.setName(event.getName());
+        car.setSeatCount(event.getSeatCount());
+        car.setLuggageCapacity(event.getLuggageCapacity());
+        car.setPassengerAirbag(event.isPassengerAirbag());
+        car.setAbs(event.isAbs());
+        car.setFuelType(event.getFuelType());
+        car.setTransmissionType(event.getTransmissionType());
         car.setBrandName(event.getBrandName());
+        car.setMinimumAge(event.getMinimumAge());
+        car.setMinimumLicenseAge(event.getMinimumLicenseAge());
+        car.setRequiredCreditCards(event.getRequiredCreditCards());
         repository.save(car);
     }
     public void updateCarElasticSearchDB(CarUpdatedEvent event)
@@ -39,7 +46,16 @@ public class ElasticSearchCarService {
         Car car = new Car();
         car.setId(String.valueOf(event.getId()));
         car.setName(event.getName());
+        car.setSeatCount(event.getSeatCount());
+        car.setLuggageCapacity(event.getLuggageCapacity());
+        car.setPassengerAirbag(event.isPassengerAirbag());
+        car.setAbs(event.isAbs());
+        car.setFuelType(event.getFuelType());
+        car.setTransmissionType(event.getTransmissionType());
         car.setBrandName(event.getBrandName());
+        car.setMinimumAge(event.getMinimumAge());
+        car.setMinimumLicenseAge(event.getMinimumLicenseAge());
+        car.setRequiredCreditCards(event.getRequiredCreditCards());
         repository.save(car);
     }
     public void deleteCarElasticSearchDB(String id)
