@@ -1,4 +1,4 @@
-package com.os.customer_service.auth;
+package com.os.customer_service.controller;
 
 import com.os.customer_service.dto.AuthenticationRequest;
 import com.os.customer_service.dto.LoginResponse;

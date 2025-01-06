@@ -1,4 +1,4 @@
-package com.os.customer_service.user;
+package com.os.customer_service.model;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;

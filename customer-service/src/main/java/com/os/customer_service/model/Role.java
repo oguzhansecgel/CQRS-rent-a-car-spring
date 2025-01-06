@@ -1,4 +1,4 @@
-package com.os.customer_service.user;
+package com.os.customer_service.model;
 
 public enum Role {
 

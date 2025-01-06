@@ -9,7 +9,15 @@
         <option value="$PROJECT_DIR$/discovery-server/pom.xml" />
         <option value="$PROJECT_DIR$/gateway-server/pom.xml" />
         <option value="$PROJECT_DIR$/customer-service/pom.xml" />
+        <option value="$PROJECT_DIR$/base-security/pom.xml" />
+        <option value="$PROJECT_DIR$/base-security-jwt/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/base-security-jwt/pom.xml" />
+        <option value="$PROJECT_DIR$/base-security/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_22" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">

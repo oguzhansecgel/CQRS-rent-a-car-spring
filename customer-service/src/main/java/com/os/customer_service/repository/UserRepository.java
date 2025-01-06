@@ -1,6 +1,6 @@
 package com.os.customer_service.repository;
 
-import com.os.customer_service.user.User;
+import com.os.customer_service.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
