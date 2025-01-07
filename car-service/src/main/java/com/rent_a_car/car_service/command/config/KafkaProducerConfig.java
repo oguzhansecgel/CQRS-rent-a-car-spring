@@ -1,6 +1,5 @@
 package com.rent_a_car.car_service.command.config;
 
-import com.rent_a_car.car_service.event.car.CarCreatedEvent;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

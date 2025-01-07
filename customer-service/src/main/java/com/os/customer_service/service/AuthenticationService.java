@@ -1,10 +1,8 @@
 package com.os.customer_service.service;
 
-import com.os.customer_service.dto.AuthenticationRequest;
-import com.os.customer_service.dto.LoginResponse;
-import com.os.customer_service.dto.RegisterResponse;
-import com.os.customer_service.dto.RegisterRequest;
+import com.os.customer_service.dto.*;
 import com.os.customer_service.config.JwtService;
+import com.os.customer_service.mapper.CustomerMapping;
 import com.os.customer_service.repository.UserRepository;
 import com.os.customer_service.model.Role;
 import com.os.customer_service.model.User;
@@ -12,6 +10,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AuthenticationService {
@@ -48,5 +48,10 @@ public class AuthenticationService {
             String jwtToken = jwtService.generateToken(user);
             return new LoginResponse(jwtToken, user.getId());
 
+    }
+    public Optional<GetByIdCustomerResponse> getByIdCustomerId(int id)
+    {
+        Optional<User> user = userRepository.findById(id);
+        return user.map(CustomerMapping.INSTANCE::getByIdCustomer);
     }
 }

@@ -1,8 +1,8 @@
 package com.rent_a_car.car_service.query.config;
 
-import com.rent_a_car.car_service.event.car.CarCreatedEvent;
-import com.rent_a_car.car_service.event.car.CarDeletedEvent;
-import com.rent_a_car.car_service.event.car.CarUpdatedEvent;
+import com.rent_a_car.car_service.shared.event.car.CarCreatedEvent;
+import com.rent_a_car.car_service.shared.event.car.CarDeletedEvent;
+import com.rent_a_car.car_service.shared.event.car.CarUpdatedEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,8 +1,8 @@
 package com.rent_a_car.car_service.query.kafka;
 
-import com.rent_a_car.car_service.event.car.CarCreatedEvent;
-import com.rent_a_car.car_service.event.car.CarDeletedEvent;
-import com.rent_a_car.car_service.event.car.CarUpdatedEvent;
+import com.rent_a_car.car_service.shared.event.car.CarCreatedEvent;
+import com.rent_a_car.car_service.shared.event.car.CarDeletedEvent;
+import com.rent_a_car.car_service.shared.event.car.CarUpdatedEvent;
 import com.rent_a_car.car_service.query.service.ElasticSearchCarService;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;

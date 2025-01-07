@@ -1,8 +1,8 @@
 package com.rent_a_car.car_service.command.kafka;
 
-import com.rent_a_car.car_service.event.car.CarCreatedEvent;
-import com.rent_a_car.car_service.event.car.CarDeletedEvent;
-import com.rent_a_car.car_service.event.car.CarUpdatedEvent;
+import com.rent_a_car.car_service.shared.event.car.CarCreatedEvent;
+import com.rent_a_car.car_service.shared.event.car.CarDeletedEvent;
+import com.rent_a_car.car_service.shared.event.car.CarUpdatedEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.rent_a_car.car_service.command.controller;
 
 import com.rent_a_car.car_service.command.commands.brand.CreateBrandCommand;
-import com.rent_a_car.car_service.command.result.ApiResponse;
+import com.rent_a_car.car_service.shared.exception.ApiResult;
 import com.rent_a_car.car_service.command.service.BrandCommandHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +19,10 @@ public class BrandController {
     }
 
     @PostMapping("/create/brand")
-    public ApiResponse<Void> createBrand(@RequestBody CreateBrandCommand command)
+    public ApiResult<Void> createBrand(@RequestBody CreateBrandCommand command)
     {
         brandCommandHandler.createBrandCommand(command);
-        return new ApiResponse<>(true,"Brand created successfully",null);
+        return new ApiResult<>(true,"Brand created successfully",null);
 
     }
 }

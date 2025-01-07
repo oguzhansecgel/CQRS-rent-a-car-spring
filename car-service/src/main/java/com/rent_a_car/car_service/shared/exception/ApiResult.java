@@ -1,14 +1,14 @@
-package com.rent_a_car.car_service.command.result;
+package com.rent_a_car.car_service.shared.exception;
 
-public class ApiResponse<T>{
+public class ApiResult<T>{
     private boolean success;
     private String message;
     private T data;
 
-    public ApiResponse() {
+    public ApiResult() {
     }
 
-    public ApiResponse(boolean success, String message, T data) {
+    public ApiResult(boolean success, String message, T data) {
         this.success = success;
         this.message = message;
         this.data = data;

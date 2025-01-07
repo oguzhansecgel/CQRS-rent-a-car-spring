@@ -1,4 +1,4 @@
-package com.rent_a_car.car_service.event.car;
+package com.rent_a_car.car_service.shared.event.car;
 
 public class CarDeletedEvent {
     private int id;

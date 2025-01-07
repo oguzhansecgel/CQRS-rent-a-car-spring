@@ -19,7 +19,9 @@ public class Car {
     private boolean abs;
     private String fuelType;
     private String transmissionType;
-
+    private Double dayPrice;
+    private Double weekPrice;
+    private Double monthPrice;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
@@ -32,21 +34,22 @@ public class Car {
     public Car() {
     }
 
-    public Car(int id, String name, Brand brand, int seatCount, int luggageCapacity, boolean passengerAirbag,
-               boolean abs, String fuelType, String transmissionType, RentalConditions rentalConditions) {
+    public Car(int id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, Double dayPrice, Double weekPrice, Double monthPrice, Brand brand, RentalConditions rentalConditions) {
         this.id = id;
         this.name = name;
-        this.brand = brand;
         this.seatCount = seatCount;
         this.luggageCapacity = luggageCapacity;
         this.passengerAirbag = passengerAirbag;
         this.abs = abs;
         this.fuelType = fuelType;
         this.transmissionType = transmissionType;
+        this.dayPrice = dayPrice;
+        this.weekPrice = weekPrice;
+        this.monthPrice = monthPrice;
+        this.brand = brand;
         this.rentalConditions = rentalConditions;
     }
 
-    // Getter ve Setter metotları
     public int getId() {
         return id;
     }
@@ -61,14 +64,6 @@ public class Car {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
     }
 
     public int getSeatCount() {
@@ -117,6 +112,38 @@ public class Car {
 
     public void setTransmissionType(String transmissionType) {
         this.transmissionType = transmissionType;
+    }
+
+    public Double getDayPrice() {
+        return dayPrice;
+    }
+
+    public void setDayPrice(Double dayPrice) {
+        this.dayPrice = dayPrice;
+    }
+
+    public Double getWeekPrice() {
+        return weekPrice;
+    }
+
+    public void setWeekPrice(Double weekPrice) {
+        this.weekPrice = weekPrice;
+    }
+
+    public Double getMonthPrice() {
+        return monthPrice;
+    }
+
+    public void setMonthPrice(Double monthPrice) {
+        this.monthPrice = monthPrice;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     public RentalConditions getRentalConditions() {

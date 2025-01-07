@@ -1,7 +1,8 @@
 package com.rent_a_car.car_service.query.service;
 
-import com.rent_a_car.car_service.event.car.CarCreatedEvent;
-import com.rent_a_car.car_service.event.car.CarUpdatedEvent;
+import com.rent_a_car.car_service.query.car.GetByIdCarQuery;
+import com.rent_a_car.car_service.shared.event.car.CarCreatedEvent;
+import com.rent_a_car.car_service.shared.event.car.CarUpdatedEvent;
 import com.rent_a_car.car_service.query.car.FindAllCarsQuery;
 import com.rent_a_car.car_service.query.mapper.CarMapping;
 import com.rent_a_car.car_service.query.model.Car;
@@ -9,6 +10,7 @@ import com.rent_a_car.car_service.query.repository.CarElasticSearchRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ElasticSearchCarService {
@@ -17,6 +19,13 @@ public class ElasticSearchCarService {
 
     public ElasticSearchCarService(CarElasticSearchRepository repository) {
         this.repository = repository;
+    }
+
+    public Optional<GetByIdCarQuery> getByIdCarQuery(String id)
+    {
+        Optional<Car> car = repository.findById(id);
+        return car.map(CarMapping.INSTANCE::getByIdCarQuery);
+
     }
 
     public Iterable<FindAllCarsQuery> findAllCarsQuery()
@@ -39,6 +48,9 @@ public class ElasticSearchCarService {
         car.setMinimumAge(event.getMinimumAge());
         car.setMinimumLicenseAge(event.getMinimumLicenseAge());
         car.setRequiredCreditCards(event.getRequiredCreditCards());
+        car.setDayPrice(event.getDayPrice());
+        car.setWeekPrice(event.getWeekPrice());
+        car.setMonthPrice(event.getMonthPrice());
         repository.save(car);
     }
     public void updateCarElasticSearchDB(CarUpdatedEvent event)

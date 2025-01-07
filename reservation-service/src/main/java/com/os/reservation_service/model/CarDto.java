@@ -1,6 +1,6 @@
-package com.rent_a_car.car_service.event.car;
+package com.os.reservation_service.model;
 
-public class CarUpdatedEvent {
+public class CarDto {
     private int id;
     private String name;
     private int seatCount;
@@ -10,14 +10,15 @@ public class CarUpdatedEvent {
     private String fuelType;
     private String transmissionType;
     private String brandName;
-    private int minimumAge;
-    private int minimumLicenseAge;
-    private int requiredCreditCards;
+    private CarRentalConditionsDto conditions;
+    private Double dayPrice;
+    private Double weekPrice;
+    private Double monthPrice;
 
-    public CarUpdatedEvent() {
+    public CarDto() {
     }
 
-    public CarUpdatedEvent(int id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, String brandName, int minimumAge, int minimumLicenseAge, int requiredCreditCards) {
+    public CarDto(int id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, String brandName, CarRentalConditionsDto conditions, Double dayPrice, Double weekPrice, Double monthPrice) {
         this.id = id;
         this.name = name;
         this.seatCount = seatCount;
@@ -27,9 +28,10 @@ public class CarUpdatedEvent {
         this.fuelType = fuelType;
         this.transmissionType = transmissionType;
         this.brandName = brandName;
-        this.minimumAge = minimumAge;
-        this.minimumLicenseAge = minimumLicenseAge;
-        this.requiredCreditCards = requiredCreditCards;
+        this.conditions = conditions;
+        this.dayPrice = dayPrice;
+        this.weekPrice = weekPrice;
+        this.monthPrice = monthPrice;
     }
 
     public int getId() {
@@ -104,33 +106,41 @@ public class CarUpdatedEvent {
         this.brandName = brandName;
     }
 
-    public int getMinimumAge() {
-        return minimumAge;
+    public CarRentalConditionsDto getConditions() {
+        return conditions;
     }
 
-    public void setMinimumAge(int minimumAge) {
-        this.minimumAge = minimumAge;
+    public void setConditions(CarRentalConditionsDto conditions) {
+        this.conditions = conditions;
     }
 
-    public int getMinimumLicenseAge() {
-        return minimumLicenseAge;
+    public Double getDayPrice() {
+        return dayPrice;
     }
 
-    public void setMinimumLicenseAge(int minimumLicenseAge) {
-        this.minimumLicenseAge = minimumLicenseAge;
+    public void setDayPrice(Double dayPrice) {
+        this.dayPrice = dayPrice;
     }
 
-    public int getRequiredCreditCards() {
-        return requiredCreditCards;
+    public Double getWeekPrice() {
+        return weekPrice;
     }
 
-    public void setRequiredCreditCards(int requiredCreditCards) {
-        this.requiredCreditCards = requiredCreditCards;
+    public void setWeekPrice(Double weekPrice) {
+        this.weekPrice = weekPrice;
+    }
+
+    public Double getMonthPrice() {
+        return monthPrice;
+    }
+
+    public void setMonthPrice(Double monthPrice) {
+        this.monthPrice = monthPrice;
     }
 
     @Override
     public String toString() {
-        return "CarCreatedEvent{" +
+        return "CarDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", seatCount=" + seatCount +
@@ -140,9 +150,10 @@ public class CarUpdatedEvent {
                 ", fuelType='" + fuelType + '\'' +
                 ", transmissionType='" + transmissionType + '\'' +
                 ", brandName='" + brandName + '\'' +
-                ", minimumAge=" + minimumAge +
-                ", minimumLicenseAge=" + minimumLicenseAge +
-                ", requiredCreditCards=" + requiredCreditCards +
+                ", conditions=" + conditions +
+                ", dayPrice=" + dayPrice +
+                ", weekPrice=" + weekPrice +
+                ", monthPrice=" + monthPrice +
                 '}';
     }
 }

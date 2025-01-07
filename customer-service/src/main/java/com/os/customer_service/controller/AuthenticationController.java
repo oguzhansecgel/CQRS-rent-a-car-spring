@@ -1,15 +1,11 @@
 package com.os.customer_service.controller;
 
-import com.os.customer_service.dto.AuthenticationRequest;
-import com.os.customer_service.dto.LoginResponse;
-import com.os.customer_service.dto.RegisterResponse;
-import com.os.customer_service.dto.RegisterRequest;
+import com.os.customer_service.dto.*;
 import com.os.customer_service.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -19,6 +15,12 @@ public class AuthenticationController {
 
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
+    }
+
+    @GetMapping("/get/by/{id}")
+    public Optional<GetByIdCustomerResponse> getById(@PathVariable int id)
+    {
+        return authenticationService.getByIdCustomerId(id);
     }
 
     @PostMapping("/register")
