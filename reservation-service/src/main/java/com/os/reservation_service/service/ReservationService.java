@@ -1,9 +1,14 @@
 package com.os.reservation_service.service;
 
-import com.os.reservation_service.dto.request.CreateReservationRequest;
-import com.os.reservation_service.model.Reservation;
+import com.os.reservation_service.dto.request.reservation.CreateReservationRequest;
+import com.os.reservation_service.dto.response.reservation.CreateReservationResponse;
+import com.os.reservation_service.dto.response.reservation.GetAllReservationResponse;
+
+import java.util.List;
 
 public interface ReservationService {
 
-    void createReservation(CreateReservationRequest request);
+    CreateReservationResponse createReservation(CreateReservationRequest request);
+
+    List<GetAllReservationResponse> getAllReservation();
 }

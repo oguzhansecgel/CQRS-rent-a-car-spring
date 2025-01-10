@@ -2,7 +2,9 @@ package com.os.reservation_service.service.impl;
 
 import com.os.reservation_service.client.CarClient;
 import com.os.reservation_service.client.CustomerClient;
-import com.os.reservation_service.dto.request.CreateReservationRequest;
+import com.os.reservation_service.dto.request.reservation.CreateReservationRequest;
+import com.os.reservation_service.dto.response.reservation.CreateReservationResponse;
+import com.os.reservation_service.dto.response.reservation.GetAllReservationResponse;
 import com.os.reservation_service.mapper.ReservationMapping;
 import com.os.reservation_service.model.CarDto;
 import com.os.reservation_service.model.CustomerDto;
@@ -12,6 +14,7 @@ import com.os.reservation_service.service.ReservationService;
 import com.os.reservation_service.util.PriceCalculator;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -28,7 +31,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public void createReservation(CreateReservationRequest request) {
+    public CreateReservationResponse createReservation(CreateReservationRequest request) {
         long durationInMillis = request.getFinishTime().getTime() - request.getStartedTime().getTime();
         long durationInDays = TimeUnit.MILLISECONDS.toDays(durationInMillis);
         if(durationInDays<2)
@@ -43,6 +46,13 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setCustomer(customer);
         reservation.setPrice(totalPrice);
         Reservation savedReservation = reservationRepository.save(reservation);
+        return new CreateReservationResponse(savedReservation.getId(),savedReservation.getStartedTime(),savedReservation.getFinishTime(),savedReservation.getCar().getBrandName(),savedReservation.getCustomer().getId(),savedReservation.getPickupOffice().getRentalOfficeName(),savedReservation.getDropOffOffice().getRentalOfficeName());
+    }
 
+    @Override
+    public List<GetAllReservationResponse> getAllReservation() {
+        List<Reservation> reservations = reservationRepository.findAll();
+
+        return ReservationMapping.INSTANCE.getAllReservationToList(reservations);
     }
 }

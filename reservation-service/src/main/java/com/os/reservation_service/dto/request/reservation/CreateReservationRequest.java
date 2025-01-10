@@ -1,7 +1,5 @@
-package com.os.reservation_service.dto.request;
+package com.os.reservation_service.dto.request.reservation;
 
-import com.os.reservation_service.model.CarDto;
-import com.os.reservation_service.model.CustomerDto;
 
 import java.util.Date;
 
@@ -52,4 +50,5 @@ public class CreateReservationRequest {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
+
 }

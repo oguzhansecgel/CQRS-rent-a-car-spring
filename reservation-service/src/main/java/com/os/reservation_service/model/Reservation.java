@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 @Document(collection = "reservation")
 public class Reservation {
@@ -16,7 +15,6 @@ public class Reservation {
     private Double price;
     private CarDto car;
     private CustomerDto customer;
-
     public Reservation() {
     }
 
@@ -53,6 +51,14 @@ public class Reservation {
         this.finishTime = finishTime;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public CarDto getCar() {
         return car;
     }
@@ -69,11 +75,5 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public Double getPrice() {
-        return price;
-    }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
 }
