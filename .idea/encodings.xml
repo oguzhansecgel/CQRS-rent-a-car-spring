@@ -6,10 +6,15 @@
     <file url="file://$PROJECT_DIR$/base-security/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/base-security/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/car-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-event/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-event/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/customer-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/discovery-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/reservation-service/src/main/java" charset="UTF-8" />
   </component>
 </project>

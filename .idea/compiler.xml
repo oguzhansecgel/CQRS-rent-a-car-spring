@@ -9,6 +9,8 @@
         <module name="config-server" />
         <module name="gateway-server" />
         <module name="discovery-server" />
+        <module name="payment-service" />
+        <module name="common-event" />
       </profile>
       <profile name="Annotation profile for reservation-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -28,6 +30,7 @@
     <bytecodeTargetLevel>
       <module name="base-security" target="17" />
       <module name="base-security-jwt" target="17" />
+      <module name="common" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -38,6 +41,7 @@
       <module name="customer-service" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
       <module name="gateway-server" options="-parameters" />
+      <module name="payment-service" options="-parameters" />
       <module name="reservation-service" options="-parameters" />
     </option>
   </component>

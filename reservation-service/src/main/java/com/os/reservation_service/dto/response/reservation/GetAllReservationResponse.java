@@ -7,17 +7,27 @@ public class GetAllReservationResponse {
     private Date startedTime;
     private Date finishTime;
     private String carId;
+    private Double price;
     private int customerId;
 
     public GetAllReservationResponse() {
     }
 
-    public GetAllReservationResponse(String id, Date startedTime, Date finishTime, String carId, int customerId) {
+    public GetAllReservationResponse(String id, Date startedTime, Date finishTime, String carId, Double price, int customerId) {
         this.id = id;
         this.startedTime = startedTime;
         this.finishTime = finishTime;
         this.carId = carId;
+        this.price = price;
         this.customerId = customerId;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getId() {

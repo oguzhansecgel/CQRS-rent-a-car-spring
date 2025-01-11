@@ -8,15 +8,25 @@ public class CreateReservationResponse {
     private Date finishTime;
     private String carId;
     private int customerId;
+    private Double price;
     public CreateReservationResponse() {
     }
 
-    public CreateReservationResponse(String id, Date startedTime, Date finishTime, String carId, int customerId) {
+    public CreateReservationResponse(String id, Date startedTime, Date finishTime, String carId, int customerId, Double price) {
         this.id = id;
         this.startedTime = startedTime;
         this.finishTime = finishTime;
         this.carId = carId;
         this.customerId = customerId;
+        this.price = price;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getId() {

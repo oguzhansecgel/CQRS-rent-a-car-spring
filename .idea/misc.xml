@@ -12,12 +12,16 @@
         <option value="$PROJECT_DIR$/base-security/pom.xml" />
         <option value="$PROJECT_DIR$/base-security-jwt/pom.xml" />
         <option value="$PROJECT_DIR$/reservation-service/pom.xml" />
+        <option value="$PROJECT_DIR$/payment-service/pom.xml" />
+        <option value="$PROJECT_DIR$/common/pom.xml" />
+        <option value="$PROJECT_DIR$/common-event/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/base-security-jwt/pom.xml" />
         <option value="$PROJECT_DIR$/base-security/pom.xml" />
+        <option value="$PROJECT_DIR$/common/pom.xml" />
       </set>
     </option>
   </component>

@@ -11,4 +11,6 @@ public interface ReservationService {
     CreateReservationResponse createReservation(CreateReservationRequest request);
 
     List<GetAllReservationResponse> getAllReservation();
+
+    void deleteReservation(String reservationId);
 }

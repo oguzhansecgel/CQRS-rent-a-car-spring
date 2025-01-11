@@ -1,10 +1,12 @@
 package com.os.reservation_service.service.impl;
 
+import com.os.event.ReservationCreatedEvent;
 import com.os.reservation_service.client.CarClient;
 import com.os.reservation_service.client.CustomerClient;
 import com.os.reservation_service.dto.request.reservation.CreateReservationRequest;
 import com.os.reservation_service.dto.response.reservation.CreateReservationResponse;
 import com.os.reservation_service.dto.response.reservation.GetAllReservationResponse;
+import com.os.reservation_service.kafka.PaymentProducer;
 import com.os.reservation_service.mapper.ReservationMapping;
 import com.os.reservation_service.model.CarDto;
 import com.os.reservation_service.model.CustomerDto;
@@ -23,11 +25,13 @@ public class ReservationServiceImpl implements ReservationService {
     private final ReservationRepository reservationRepository;
     private final CarClient carClient;
     private final CustomerClient customerClient;
+    private final PaymentProducer paymentProducer;
 
-    public ReservationServiceImpl(ReservationRepository reservationRepository, CarClient carClient, CustomerClient customerClient) {
+    public ReservationServiceImpl(ReservationRepository reservationRepository, CarClient carClient, CustomerClient customerClient, PaymentProducer paymentProducer) {
         this.reservationRepository = reservationRepository;
         this.carClient = carClient;
         this.customerClient = customerClient;
+        this.paymentProducer = paymentProducer;
     }
 
     @Override
@@ -46,7 +50,11 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setCustomer(customer);
         reservation.setPrice(totalPrice);
         Reservation savedReservation = reservationRepository.save(reservation);
-        return new CreateReservationResponse(savedReservation.getId(),savedReservation.getStartedTime(),savedReservation.getFinishTime(),savedReservation.getCar().getBrandName(),savedReservation.getCustomer().getId(),savedReservation.getPickupOffice().getRentalOfficeName(),savedReservation.getDropOffOffice().getRentalOfficeName());
+        ReservationCreatedEvent event = new ReservationCreatedEvent();
+        event.setReservationId(savedReservation.getId());
+        paymentProducer.sendMessage(event);
+
+        return new CreateReservationResponse(savedReservation.getId(),savedReservation.getStartedTime(),savedReservation.getFinishTime(),savedReservation.getCar().getBrandName(),savedReservation.getCustomer().getId(),savedReservation.getPrice());
     }
 
     @Override
@@ -54,5 +62,10 @@ public class ReservationServiceImpl implements ReservationService {
         List<Reservation> reservations = reservationRepository.findAll();
 
         return ReservationMapping.INSTANCE.getAllReservationToList(reservations);
+    }
+
+    @Override
+    public void deleteReservation(String reservationId) {
+        reservationRepository.deleteById(reservationId);
     }
 }
