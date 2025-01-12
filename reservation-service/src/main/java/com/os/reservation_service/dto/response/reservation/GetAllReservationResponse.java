@@ -9,17 +9,19 @@ public class GetAllReservationResponse {
     private String carId;
     private Double price;
     private int customerId;
+    private String status;
 
     public GetAllReservationResponse() {
     }
 
-    public GetAllReservationResponse(String id, Date startedTime, Date finishTime, String carId, Double price, int customerId) {
+    public GetAllReservationResponse(String id, Date startedTime, Date finishTime, String carId, Double price, int customerId, String status) {
         this.id = id;
         this.startedTime = startedTime;
         this.finishTime = finishTime;
         this.carId = carId;
         this.price = price;
         this.customerId = customerId;
+        this.status = status;
     }
 
     public Double getPrice() {
@@ -70,5 +72,11 @@ public class GetAllReservationResponse {
         this.customerId = customerId;
     }
 
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

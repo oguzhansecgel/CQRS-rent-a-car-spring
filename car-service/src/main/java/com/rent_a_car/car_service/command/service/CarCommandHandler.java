@@ -41,8 +41,6 @@ public class CarCommandHandler {
         car.setFuelType(createCarCommand.getFuelType());
         car.setTransmissionType(createCarCommand.getTransmissionType());
         car.setDayPrice(createCarCommand.getDayPrice());
-        car.setWeekPrice(createCarCommand.getWeekPrice());
-        car.setMonthPrice(createCarCommand.getMonthPrice());
         car.setBrand(brandRepository.findById(createCarCommand.getBrandId()).orElseThrow());
 
         car.setRentalConditions(conditionsRepository.findById(createCarCommand.getRentalConditionsId())
@@ -62,9 +60,7 @@ public class CarCommandHandler {
                 car.getRentalConditions().getMinimumAge(),
                 car.getRentalConditions().getMinimumLicenseAge(),
                 car.getRentalConditions().getRequiredCreditCards(),
-                car.getDayPrice(),
-                car.getWeekPrice(),
-                car.getMonthPrice()
+                car.getDayPrice()
         );
         carEventProducer.sendMessage(carCreatedEvent);
         return new CreateCarResponse(
@@ -78,9 +74,7 @@ public class CarCommandHandler {
                 savedCar.getTransmissionType(),
                 savedCar.getBrand().getId(),
                 savedCar.getRentalConditions().getId(),
-                savedCar.getDayPrice(),
-                savedCar.getWeekPrice(),
-                savedCar.getMonthPrice()
+                savedCar.getDayPrice()
         );
 
     }
@@ -96,8 +90,6 @@ public class CarCommandHandler {
         car.setFuelType(updateCarCommand.getFuelType());
         car.setTransmissionType(updateCarCommand.getTransmissionType());
         car.setDayPrice(updateCarCommand.getDayPrice());
-        car.setWeekPrice(updateCarCommand.getWeekPrice());
-        car.setMonthPrice(updateCarCommand.getMonthPrice());
         car.setBrand(brandRepository.findById(updateCarCommand.getBrandId()).orElseThrow());
 
         car.setRentalConditions(conditionsRepository.findById(updateCarCommand.getRentalConditionsId())
@@ -117,9 +109,7 @@ public class CarCommandHandler {
                 car.getRentalConditions().getMinimumAge(),
                 car.getRentalConditions().getMinimumLicenseAge(),
                 car.getRentalConditions().getRequiredCreditCards(),
-                car.getDayPrice(),
-                car.getWeekPrice(),
-                car.getMonthPrice()
+                car.getDayPrice()
         );
         carEventProducer.sendUpdateMessage(event);
         return new UpdateCarResponse(
@@ -133,9 +123,7 @@ public class CarCommandHandler {
                 savedCar.getTransmissionType(),
                 savedCar.getBrand().getId(),
                 savedCar.getRentalConditions().getId(),
-                savedCar.getDayPrice(),
-                savedCar.getWeekPrice(),
-                savedCar.getMonthPrice()
+                savedCar.getDayPrice()
         );
     }
     public void deletedCarCommand(int id)

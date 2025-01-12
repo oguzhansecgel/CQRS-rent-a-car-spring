@@ -27,8 +27,6 @@ public interface CarMapping {
     @Mapping(target = "minimumLicenseAge", source = "minimumLicenseAge")
     @Mapping(target = "requiredCreditCards", source = "requiredCreditCards")
     @Mapping(target = "dayPrice", source = "dayPrice")
-    @Mapping(target = "weekPrice", source = "weekPrice")
-    @Mapping(target = "monthPrice", source = "monthPrice")
     FindAllCarsQuery findAllCarsQuery(Car car);
     Iterable<FindAllCarsQuery> findAllCarsOueryToList(Iterable<Car> cars);
 }

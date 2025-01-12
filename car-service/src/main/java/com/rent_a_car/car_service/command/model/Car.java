@@ -20,8 +20,6 @@ public class Car {
     private String fuelType;
     private String transmissionType;
     private Double dayPrice;
-    private Double weekPrice;
-    private Double monthPrice;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
@@ -34,7 +32,7 @@ public class Car {
     public Car() {
     }
 
-    public Car(int id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, Double dayPrice, Double weekPrice, Double monthPrice, Brand brand, RentalConditions rentalConditions) {
+    public Car(int id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, Double dayPrice, Brand brand, RentalConditions rentalConditions) {
         this.id = id;
         this.name = name;
         this.seatCount = seatCount;
@@ -44,8 +42,6 @@ public class Car {
         this.fuelType = fuelType;
         this.transmissionType = transmissionType;
         this.dayPrice = dayPrice;
-        this.weekPrice = weekPrice;
-        this.monthPrice = monthPrice;
         this.brand = brand;
         this.rentalConditions = rentalConditions;
     }
@@ -120,22 +116,6 @@ public class Car {
 
     public void setDayPrice(Double dayPrice) {
         this.dayPrice = dayPrice;
-    }
-
-    public Double getWeekPrice() {
-        return weekPrice;
-    }
-
-    public void setWeekPrice(Double weekPrice) {
-        this.weekPrice = weekPrice;
-    }
-
-    public Double getMonthPrice() {
-        return monthPrice;
-    }
-
-    public void setMonthPrice(Double monthPrice) {
-        this.monthPrice = monthPrice;
     }
 
     public Brand getBrand() {

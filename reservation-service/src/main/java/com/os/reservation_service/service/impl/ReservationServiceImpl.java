@@ -11,6 +11,7 @@ import com.os.reservation_service.mapper.ReservationMapping;
 import com.os.reservation_service.model.CarDto;
 import com.os.reservation_service.model.CustomerDto;
 import com.os.reservation_service.model.Reservation;
+import com.os.reservation_service.model.Status;
 import com.os.reservation_service.repository.ReservationRepository;
 import com.os.reservation_service.service.ReservationService;
 import com.os.reservation_service.util.PriceCalculator;
@@ -52,6 +53,7 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation savedReservation = reservationRepository.save(reservation);
         ReservationCreatedEvent event = new ReservationCreatedEvent();
         event.setReservationId(savedReservation.getId());
+        event.setTotalPrice(savedReservation.getPrice());
         paymentProducer.sendMessage(event);
 
         return new CreateReservationResponse(savedReservation.getId(),savedReservation.getStartedTime(),savedReservation.getFinishTime(),savedReservation.getCar().getBrandName(),savedReservation.getCustomer().getId(),savedReservation.getPrice());
@@ -67,5 +69,12 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void deleteReservation(String reservationId) {
         reservationRepository.deleteById(reservationId);
+    }
+
+    @Override
+    public void changedStatus(String reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId).orElse(null);
+        reservation.setStatus(Status.COMPLETED);
+        reservationRepository.save(reservation);
     }
 }

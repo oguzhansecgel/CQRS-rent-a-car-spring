@@ -14,14 +14,12 @@ public class CarCreatedEvent {
     private int minimumLicenseAge;
     private int requiredCreditCards;
     private Double dayPrice;
-    private Double weekPrice;
-    private Double monthPrice;
 
 
     public CarCreatedEvent() {
     }
 
-    public CarCreatedEvent(int id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, String brandName, int minimumAge, int minimumLicenseAge, int requiredCreditCards, Double dayPrice, Double weekPrice, Double monthPrice) {
+    public CarCreatedEvent(int id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, String brandName, int minimumAge, int minimumLicenseAge, int requiredCreditCards, Double dayPrice) {
         this.id = id;
         this.name = name;
         this.seatCount = seatCount;
@@ -35,8 +33,6 @@ public class CarCreatedEvent {
         this.minimumLicenseAge = minimumLicenseAge;
         this.requiredCreditCards = requiredCreditCards;
         this.dayPrice = dayPrice;
-        this.weekPrice = weekPrice;
-        this.monthPrice = monthPrice;
     }
 
     @Override
@@ -55,8 +51,6 @@ public class CarCreatedEvent {
                 ", minimumLicenseAge=" + minimumLicenseAge +
                 ", requiredCreditCards=" + requiredCreditCards +
                 ", dayPrice=" + dayPrice +
-                ", weekPrice=" + weekPrice +
-                ", monthPrice=" + monthPrice +
                 '}';
     }
 
@@ -162,21 +156,5 @@ public class CarCreatedEvent {
 
     public void setDayPrice(Double dayPrice) {
         this.dayPrice = dayPrice;
-    }
-
-    public Double getWeekPrice() {
-        return weekPrice;
-    }
-
-    public void setWeekPrice(Double weekPrice) {
-        this.weekPrice = weekPrice;
-    }
-
-    public Double getMonthPrice() {
-        return monthPrice;
-    }
-
-    public void setMonthPrice(Double monthPrice) {
-        this.monthPrice = monthPrice;
     }
 }

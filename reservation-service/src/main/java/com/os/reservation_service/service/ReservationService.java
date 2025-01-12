@@ -13,4 +13,5 @@ public interface ReservationService {
     List<GetAllReservationResponse> getAllReservation();
 
     void deleteReservation(String reservationId);
+    void changedStatus(String reservationId);
 }

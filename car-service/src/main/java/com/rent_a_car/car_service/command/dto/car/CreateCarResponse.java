@@ -15,13 +15,11 @@ public class CreateCarResponse {
     private int brandId;
     private int rentalConditionsId;
     private Double dayPrice;
-    private Double weekPrice;
-    private Double monthPrice;
 
     public CreateCarResponse() {
     }
 
-    public CreateCarResponse(int id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, int brandId, int rentalConditionsId, Double dayPrice, Double weekPrice, Double monthPrice) {
+    public CreateCarResponse(int id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, int brandId, int rentalConditionsId, Double dayPrice) {
         this.id = id;
         this.name = name;
         this.seatCount = seatCount;
@@ -33,8 +31,6 @@ public class CreateCarResponse {
         this.brandId = brandId;
         this.rentalConditionsId = rentalConditionsId;
         this.dayPrice = dayPrice;
-        this.weekPrice = weekPrice;
-        this.monthPrice = monthPrice;
     }
 
     public int getId() {
@@ -125,19 +121,4 @@ public class CreateCarResponse {
         this.dayPrice = dayPrice;
     }
 
-    public Double getWeekPrice() {
-        return weekPrice;
-    }
-
-    public void setWeekPrice(Double weekPrice) {
-        this.weekPrice = weekPrice;
-    }
-
-    public Double getMonthPrice() {
-        return monthPrice;
-    }
-
-    public void setMonthPrice(Double monthPrice) {
-        this.monthPrice = monthPrice;
-    }
 }

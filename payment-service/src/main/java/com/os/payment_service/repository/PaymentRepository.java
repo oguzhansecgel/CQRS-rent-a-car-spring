@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PaymentRepository extends MongoRepository<Payment, String> {
+    Payment findByReservationId(String reservationId);
 }

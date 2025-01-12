@@ -15,16 +15,18 @@ public class Reservation {
     private Double price;
     private CarDto car;
     private CustomerDto customer;
+    private Status status = Status.PENDING;
     public Reservation() {
     }
 
-    public Reservation(String id, Date startedTime, Date finishTime, Double price, CarDto car, CustomerDto customer) {
+    public Reservation(String id, Date startedTime, Date finishTime, Double price, CarDto car, CustomerDto customer, Status status) {
         this.id = id;
         this.startedTime = startedTime;
         this.finishTime = finishTime;
         this.price = price;
         this.car = car;
         this.customer = customer;
+        this.status = status;
     }
 
     public String getId() {
@@ -75,5 +77,11 @@ public class Reservation {
         this.customer = customer;
     }
 
+    public Status getStatus() {
+        return status;
+    }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }

@@ -12,15 +12,17 @@ public class Payment {
     private String cardNumber;
     private String expiryDate;
     private String cvv;
+    private Double totalAmount;
     public Payment() {
     }
 
-    public Payment(String id, String reservationId , String cardNumber, String expiryDate, String cvv) {
+    public Payment(String id, String reservationId, String cardNumber, String expiryDate, String cvv, Double totalAmount) {
         this.id = id;
         this.reservationId = reservationId;
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
         this.cvv = cvv;
+        this.totalAmount = totalAmount;
     }
 
     public String getCardNumber() {
@@ -62,5 +64,13 @@ public class Payment {
 
     public void setCvv(String cvv) {
         this.cvv = cvv;
+    }
+
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }

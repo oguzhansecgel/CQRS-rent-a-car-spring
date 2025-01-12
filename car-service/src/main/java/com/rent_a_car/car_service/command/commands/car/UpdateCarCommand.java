@@ -16,13 +16,11 @@ public class UpdateCarCommand {
     private int brandId;
     private int rentalConditionsId;
     private Double dayPrice;
-    private Double weekPrice;
-    private Double monthPrice;
 
     public UpdateCarCommand() {
     }
 
-    public UpdateCarCommand(String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, int brandId, int rentalConditionsId, Double dayPrice, Double weekPrice, Double monthPrice) {
+    public UpdateCarCommand(String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, int brandId, int rentalConditionsId, Double dayPrice) {
         this.name = name;
         this.seatCount = seatCount;
         this.luggageCapacity = luggageCapacity;
@@ -33,8 +31,6 @@ public class UpdateCarCommand {
         this.brandId = brandId;
         this.rentalConditionsId = rentalConditionsId;
         this.dayPrice = dayPrice;
-        this.weekPrice = weekPrice;
-        this.monthPrice = monthPrice;
     }
 
     public @NotEmpty(message = "{car.name.validation.constraints.NotNull.message}") String getName() {
@@ -117,19 +113,4 @@ public class UpdateCarCommand {
         this.dayPrice = dayPrice;
     }
 
-    public Double getWeekPrice() {
-        return weekPrice;
-    }
-
-    public void setWeekPrice(Double weekPrice) {
-        this.weekPrice = weekPrice;
-    }
-
-    public Double getMonthPrice() {
-        return monthPrice;
-    }
-
-    public void setMonthPrice(Double monthPrice) {
-        this.monthPrice = monthPrice;
-    }
 }

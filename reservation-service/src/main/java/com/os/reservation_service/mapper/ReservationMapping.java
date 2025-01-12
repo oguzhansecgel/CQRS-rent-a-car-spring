@@ -29,6 +29,7 @@ public interface ReservationMapping {
     @Mapping(target = "finishTime", source = "reservation.finishTime")
     @Mapping(target = "carId", source = "reservation.car.id")       // car.id'yi haritalıyoruz
     @Mapping(target = "customerId", source = "reservation.customer.id")
+    @Mapping(target = "status",source = "status")
     GetAllReservationResponse getAllReservations(Reservation reservation);
     List<GetAllReservationResponse> getAllReservationToList(List<Reservation> reservationList);
 

@@ -49,8 +49,6 @@ public class ElasticSearchCarService {
         car.setMinimumLicenseAge(event.getMinimumLicenseAge());
         car.setRequiredCreditCards(event.getRequiredCreditCards());
         car.setDayPrice(event.getDayPrice());
-        car.setWeekPrice(event.getWeekPrice());
-        car.setMonthPrice(event.getMonthPrice());
         repository.save(car);
     }
     public void updateCarElasticSearchDB(CarUpdatedEvent event)

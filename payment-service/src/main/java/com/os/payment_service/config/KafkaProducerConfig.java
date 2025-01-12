@@ -1,4 +1,5 @@
 package com.os.payment_service.config;
+import com.os.event.PaymentCreatedEvent;
 import com.os.event.PaymentFailedEvent;
 import com.os.event.ReservationCreatedEvent;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -34,5 +35,18 @@ public class KafkaProducerConfig {
     @Bean
     public KafkaTemplate<String, PaymentFailedEvent> paymentFailedEventKafkaTemplate() {
         return new KafkaTemplate<>(paymentFailedEventProducerFactory());
+    }
+    @Bean
+    public ProducerFactory<String, PaymentCreatedEvent> paymentCreatedEventProducerFactory() {
+        Map<String, Object> configPropss = new HashMap<>();
+        configPropss.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaAddress);
+        configPropss.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configPropss.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new DefaultKafkaProducerFactory<>(configPropss);
+    }
+
+    @Bean
+    public KafkaTemplate<String, PaymentCreatedEvent> kafkaSuccessfly() {
+        return new KafkaTemplate<>(paymentCreatedEventProducerFactory());
     }
 }

@@ -15,12 +15,10 @@ public class FindAllCarsQuery {
     private int minimumLicenseAge;
     private int requiredCreditCards;
     private Double dayPrice;
-    private Double weekPrice;
-    private Double monthPrice;
     public FindAllCarsQuery() {
     }
 
-    public FindAllCarsQuery(String id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, String brandName, int minimumAge, int minimumLicenseAge, int requiredCreditCards, Double dayPrice, Double weekPrice, Double monthPrice) {
+    public FindAllCarsQuery(String id, String name, int seatCount, int luggageCapacity, boolean passengerAirbag, boolean abs, String fuelType, String transmissionType, String brandName, int minimumAge, int minimumLicenseAge, int requiredCreditCards, Double dayPrice) {
         this.id = id;
         this.name = name;
         this.seatCount = seatCount;
@@ -34,8 +32,6 @@ public class FindAllCarsQuery {
         this.minimumLicenseAge = minimumLicenseAge;
         this.requiredCreditCards = requiredCreditCards;
         this.dayPrice = dayPrice;
-        this.weekPrice = weekPrice;
-        this.monthPrice = monthPrice;
     }
 
     public String getId() {
@@ -140,21 +136,5 @@ public class FindAllCarsQuery {
 
     public void setDayPrice(Double dayPrice) {
         this.dayPrice = dayPrice;
-    }
-
-    public Double getWeekPrice() {
-        return weekPrice;
-    }
-
-    public void setWeekPrice(Double weekPrice) {
-        this.weekPrice = weekPrice;
-    }
-
-    public Double getMonthPrice() {
-        return monthPrice;
-    }
-
-    public void setMonthPrice(Double monthPrice) {
-        this.monthPrice = monthPrice;
     }
 }
