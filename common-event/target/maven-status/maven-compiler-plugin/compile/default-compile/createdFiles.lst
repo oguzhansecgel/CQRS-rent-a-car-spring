@@ -1,0 +1,3 @@
+com\os\event\PaymentCreatedEvent.class
+com\os\event\PaymentFailedEvent.class
+com\os\event\ReservationCreatedEvent.class

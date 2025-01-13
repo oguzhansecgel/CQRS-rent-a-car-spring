@@ -1,7 +1,7 @@
 package com.os.payment_service.config;
+
 import com.os.event.PaymentCreatedEvent;
 import com.os.event.PaymentFailedEvent;
-import com.os.event.ReservationCreatedEvent;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +13,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -23,30 +22,22 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String kafkaAddress;
 
-    @Bean
-    public ProducerFactory<String, PaymentFailedEvent> paymentFailedEventProducerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaAddress);
-        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+    private <T> ProducerFactory<String, T> createProducerFactory() {
+        Map<String, Object> configProps = Map.of(
+                ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaAddress,
+                ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class,
+                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class
+        );
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
     @Bean
     public KafkaTemplate<String, PaymentFailedEvent> paymentFailedEventKafkaTemplate() {
-        return new KafkaTemplate<>(paymentFailedEventProducerFactory());
-    }
-    @Bean
-    public ProducerFactory<String, PaymentCreatedEvent> paymentCreatedEventProducerFactory() {
-        Map<String, Object> configPropss = new HashMap<>();
-        configPropss.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaAddress);
-        configPropss.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configPropss.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        return new DefaultKafkaProducerFactory<>(configPropss);
+        return new KafkaTemplate<>(createProducerFactory());
     }
 
     @Bean
-    public KafkaTemplate<String, PaymentCreatedEvent> kafkaSuccessfly() {
-        return new KafkaTemplate<>(paymentCreatedEventProducerFactory());
+    public KafkaTemplate<String, PaymentCreatedEvent> paymentCreatedEventKafkaTemplate() {
+        return new KafkaTemplate<>(createProducerFactory());
     }
 }
