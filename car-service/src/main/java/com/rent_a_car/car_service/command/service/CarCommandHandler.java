@@ -91,7 +91,7 @@ public class CarCommandHandler {
         car.setTransmissionType(updateCarCommand.getTransmissionType());
         car.setDayPrice(updateCarCommand.getDayPrice());
         car.setBrand(brandRepository.findById(updateCarCommand.getBrandId()).orElseThrow());
-
+        car.setDayPrice(updateCarCommand.getDayPrice());
         car.setRentalConditions(conditionsRepository.findById(updateCarCommand.getRentalConditionsId())
                 .orElseThrow(() -> new IllegalArgumentException("Rental conditions not found")));
 

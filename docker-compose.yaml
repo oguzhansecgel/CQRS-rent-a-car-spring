@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   car-service:
@@ -17,10 +16,77 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=test
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9093
+      - SPRING_PROFILES_ACTIVE=prod
     depends_on:
       - car-service-db
       - elasticsearch
+      - kafka
 
+  customer-service:
+    container_name: "customer-service-prod"
+    build:
+      dockerfile: Dockerfile
+      context: ./customer-service
+    ports:
+      - '8082:8082'
+    restart: on-failure
+    networks:
+      - common
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://customer-service-db:5432/rent-a-customer-service-db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=test
+      - SPRING_PROFILES_ACTIVE=prod
+    depends_on:
+      - customer-service-db
+
+  payment-service:
+    container_name: "payment-service-prod"
+    build:
+      context: .
+      dockerfile: ./payment-service/Dockerfile
+    ports:
+      - '8084:8084'
+    restart: on-failure
+    networks:
+      - common
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://payment-db:27017/rent-a-car-payment-db
+      - SPRING_PROFILES_ACTIVE=prod
+    depends_on:
+      - payment-db
+  reservation-service:
+    container_name: "reservation-service-prod"
+    build:
+      context: .
+      dockerfile: ./reservation-service/Dockerfile
+    ports:
+      - '8083:8083'
+    restart: on-failure
+    networks:
+      - common
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://reservation-db:27017/rent-a-car-reservation-db
+      - SPRING_PROFILES_ACTIVE=prod
+    depends_on:
+      - reservation-db
+
+  discovery-server:
+    build:
+      context: ./discovery-server
+    ports:
+      - "8888:8888"
+    restart: on-failure
+    networks:
+      - common
+  gateway-server:
+    build:
+      context: ./gateway-server
+    ports:
+      - '8080:8080'
+    restart: on-failure
+    networks:
+      - common
 
   car-service-db:
     container_name: 'car-service-db'
@@ -29,7 +95,6 @@ services:
       POSTGRES_DB: rent-a-car-service-db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: test
-
     ports:
       - '5490:5432'
     volumes:
@@ -37,6 +102,38 @@ services:
     networks:
       - common
 
+  customer-service-db:
+    container_name: 'customer-service-db'
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: rent-a-customer-service-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test
+    ports:
+      - '5491:5432'
+    volumes:
+      - customer-service:/var/lib/postgresql/data
+    networks:
+      - common
+
+  payment-db:
+    image: mongo:latest
+    container_name: 'payment-service-db'
+    ports:
+      - "27041:27017"
+    volumes:
+      - payment-service-data:/data/db
+    networks:
+      - common
+  reservation-db:
+    image: mongo:latest
+    container_name: 'reservation-service-db'
+    ports:
+      - "27040:27017"
+    volumes:
+      - reservation-service-data:/data/db
+    networks:
+      - common
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
@@ -97,6 +194,32 @@ services:
     networks:
       - common
 
+  kafka-exporter:
+    image: danielqsj/kafka-exporter:latest
+    ports:
+      - "9308:9308"
+    command:
+      - --kafka.server=kafka:9093
+    networks:
+      - common
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus-rent-a-car
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - common
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana-rent-a-car
+    ports:
+      - "3000:3000"
+    networks:
+      - common
 
 networks:
   common:
@@ -105,4 +228,8 @@ networks:
 volumes:
   car-service:
     driver: local
+  customer-service:
+    driver: local
   elasticsearch-data:
+  payment-service-data:
+  reservation-service-data:
